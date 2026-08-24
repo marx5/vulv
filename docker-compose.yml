@@ -1,0 +1,14 @@
+name: vulv-client
+
+services:
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    networks:
+      - vulv-network
+
+networks:
+  vulv-network:
+    external: true
