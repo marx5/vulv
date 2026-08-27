@@ -8,7 +8,7 @@ export default function About({ personalInfo }) {
       <Section.Header 
         label="01. ABOUT ME"
         title="Giới thiệu bản thân"
-        subtitle="Tập trung vào hiệu năng, trải nghiệm người dùng và mã nguồn chất lượng cao."
+        subtitle=""
       />
 
       <div className="about-grid-compact">

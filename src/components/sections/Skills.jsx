@@ -20,7 +20,7 @@ export default function Skills({ skills = [] }) {
           </div>
         }
         title="Kỹ năng chuyên môn"
-        subtitle="Hệ sinh thái công nghệ & kiến trúc fullstack xây dựng trên nền tảng 3D tương tác."
+        subtitle="Hệ sinh thái công nghệ & kiến trúc fullstack"
       />
 
       <div className="skills-liquid-layout">
@@ -30,7 +30,7 @@ export default function Skills({ skills = [] }) {
           <div className="panel-header-bar">
             <span className="panel-status-indicator">LIVE ARCHITECTURE</span>
             <span className="panel-category-tag">
-              {hoveredTech ? `FOCUS: ${hoveredTech}` : (skills[activeCategoryIndex]?.category || 'Fullstack Stack')}
+              {hoveredTech ? `${hoveredTech}` : (skills[activeCategoryIndex]?.category || 'Fullstack Stack')}
             </span>
           </div>
 
@@ -72,7 +72,6 @@ export default function Skills({ skills = [] }) {
                   </div>
                   <div className="card-title-group">
                     <h3 className="liquid-category-title">{cat.category}</h3>
-                    <span className="liquid-category-count">{cat.items.length} công nghệ</span>
                   </div>
                 </div>
 
