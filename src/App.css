@@ -568,52 +568,367 @@ body {
 }
 
 /* ==========================================================================
-   Skills Section (Compact)
+   Skills Section - Liquid Glass UI & Three.js 3D System
    ========================================================================== */
 
-.skills-grid-compact {
+.liquid-glass-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  background: rgba(56, 189, 248, 0.07);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  border-radius: 9999px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.6rem;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.liquid-badge-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent-primary);
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+
+.skills-liquid-layout {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.1rem;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
 }
 
-.skill-category-card {
-  padding: 1.5rem 1.4rem;
+/* Liquid Glass 3D Panel */
+.liquid-glass-panel {
+  position: relative;
+  background: linear-gradient(135deg, rgba(14, 23, 42, 0.65) 0%, rgba(8, 14, 28, 0.75) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.4rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.skill-category-title {
-  font-size: 1.05rem;
+.liquid-glass-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.6), rgba(129, 140, 248, 0.6), transparent);
+}
+
+.liquid-glass-glow-orb {
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.panel-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+}
+
+.panel-status-indicator {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
   font-weight: 700;
-  color: var(--text-main);
-  margin-bottom: 1rem;
+  color: var(--accent-emerald);
+  background: rgba(52, 211, 153, 0.1);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+.panel-category-tag {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  background: rgba(56, 189, 248, 0.1);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+/* Three.js Canvas Container */
+.three-skills-wrapper {
+  position: relative;
+  width: 100%;
+  height: 310px;
+  margin: 0.5rem 0;
+  z-index: 1;
+}
+
+.three-canvas-container {
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
+}
+
+.three-canvas-container:active {
+  cursor: grabbing;
+}
+
+.three-canvas-hint {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(8, 14, 28, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
   display: flex;
   align-items: center;
   gap: 6px;
+  pointer-events: none;
+  white-space: nowrap;
 }
 
-.skill-chips-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+.three-hint-pulse {
+  width: 6px;
+  height: 6px;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--accent-primary);
+  animation: pulse-dot 1.8s infinite;
 }
 
-.skill-chip-compact {
-  padding: 5px 10px;
-  border: 1px dashed var(--border-dashed);
-  border-radius: var(--border-radius-sm);
-  background: rgba(12, 20, 36, 0.6);
-  font-size: 0.78rem;
+/* 3D Panel Stats Footer */
+.skills-3d-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  position: relative;
+  z-index: 2;
+}
+
+.stats-glass-chip {
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 6px 8px;
+  text-align: center;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.stats-glass-chip .stats-label {
+  display: block;
+  font-size: 0.62rem;
+  font-family: var(--font-mono);
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+}
+
+.stats-glass-chip .stats-value {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 700;
   color: var(--text-main);
   font-family: var(--font-mono);
+}
+
+/* Liquid Glass Cards Column */
+.skills-cards-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  justify-content: center;
+}
+
+.liquid-glass-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.55) 0%, rgba(10, 16, 31, 0.65) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 14px;
+  padding: 1.2rem 1.3rem;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  cursor: pointer;
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.liquid-glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transition: all 0.3s ease;
+}
+
+.liquid-glass-card:hover {
+  transform: translateY(-2px) scale(1.01);
+  background: linear-gradient(135deg, rgba(20, 32, 58, 0.7) 0%, rgba(12, 22, 42, 0.8) 100%);
+  border-color: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 15px rgba(56, 189, 248, 0.12);
+}
+
+.liquid-glass-card.active {
+  background: linear-gradient(135deg, rgba(22, 38, 70, 0.8) 0%, rgba(14, 25, 48, 0.88) 100%);
+  border-color: rgba(56, 189, 248, 0.55);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.liquid-glass-card.active::before {
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.8), rgba(129, 140, 248, 0.8), transparent);
+}
+
+.card-ambient-light {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.liquid-glass-card:hover .card-ambient-light,
+.liquid-glass-card.active .card-ambient-light {
+  opacity: 1;
+}
+
+.liquid-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 0.85rem;
+}
+
+.card-icon-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 8px;
+  padding: 5px 8px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.card-emoji {
+  font-size: 1rem;
+}
+
+.card-index-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+.card-title-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.liquid-category-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.liquid-category-count {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+/* Liquid Chips Grid */
+.liquid-chips-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.liquid-skill-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  color: var(--text-main);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pill-dot {
+  width: 5px;
+  height: 5px;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  opacity: 0.7;
   transition: all 0.2s ease;
 }
 
-.skill-chip-compact:hover {
-  border-color: var(--accent-primary);
+.liquid-glass-card:hover .liquid-skill-pill,
+.liquid-glass-card.active .liquid-skill-pill {
   background: rgba(56, 189, 248, 0.08);
-  color: var(--accent-primary);
-  transform: translateY(-1px);
+  border-color: rgba(56, 189, 248, 0.25);
 }
+
+.liquid-skill-pill:hover {
+  background: rgba(56, 189, 248, 0.2) !important;
+  border-color: var(--accent-primary) !important;
+  color: #ffffff;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25);
+}
+
+.liquid-skill-pill:hover .pill-dot {
+  opacity: 1;
+  transform: scale(1.4);
+  box-shadow: 0 0 6px var(--accent-primary);
+}
+
 
 /* ==========================================================================
    Projects Section (Compact)
@@ -885,15 +1200,41 @@ body {
 }
 
 /* ==========================================================================
-   Responsive Breakpoints
+   Responsive Breakpoints - Smartphone, Tablet/iPad, Desktop
    ========================================================================== */
 
+/* Tablet & iPad (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .skills-liquid-layout {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .skills-3d-panel {
+    padding: 1.2rem;
+  }
+
+  .three-skills-wrapper {
+    height: 280px;
+  }
+
+  .skills-cards-column {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.85rem;
+  }
+}
+
+/* Medium Tablets & Mobile Landscape (max-width: 960px) */
 @media (max-width: 960px) {
   .about-grid-compact,
-  .skills-grid-compact,
   .projects-grid-compact,
   .timeline-grid-compact,
   .contact-grid-compact {
+    grid-template-columns: 1fr;
+  }
+
+  .skills-cards-column {
     grid-template-columns: 1fr;
   }
 
@@ -912,6 +1253,7 @@ body {
   }
 }
 
+/* Smartphone & Small Tablets (max-width: 640px) */
 @media (max-width: 640px) {
   .navbar-nav {
     display: none;
@@ -947,8 +1289,69 @@ body {
     width: 100%;
   }
 
+  /* Skills Liquid Glass on Mobile */
+  .skills-liquid-layout {
+    gap: 0.9rem;
+  }
+
+  .skills-3d-panel {
+    padding: 1rem 0.85rem;
+    border-radius: 12px;
+  }
+
+  .three-skills-wrapper {
+    height: 230px;
+  }
+
+  .three-canvas-hint {
+    font-size: 0.65rem;
+    padding: 3px 10px;
+  }
+
+  .skills-3d-stats {
+    gap: 0.4rem;
+  }
+
+  .stats-glass-chip {
+    padding: 4px 6px;
+  }
+
+  .stats-glass-chip .stats-label {
+    font-size: 0.58rem;
+  }
+
+  .stats-glass-chip .stats-value {
+    font-size: 0.78rem;
+  }
+
+  .liquid-glass-card {
+    padding: 1rem 0.95rem;
+    border-radius: 12px;
+  }
+
+  .liquid-skill-pill {
+    padding: 4px 8px;
+    font-size: 0.74rem;
+  }
+
   .footer-inner {
     flex-direction: column;
     text-align: center;
+  }
+}
+
+/* Extra Small Smartphones (max-width: 420px) */
+@media (max-width: 420px) {
+  .three-skills-wrapper {
+    height: 200px;
+  }
+
+  .liquid-chips-grid {
+    gap: 0.35rem;
+  }
+
+  .liquid-skill-pill {
+    padding: 3px 7px;
+    font-size: 0.7rem;
   }
 }
