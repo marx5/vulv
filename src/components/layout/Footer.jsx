@@ -25,12 +25,6 @@ export default function Footer({ personalInfo }) {
           >
             [Đầu trang ↑]
           </a>
-          <a href={personalInfo?.github || '#'} target="_blank" rel="noopener noreferrer" className="footer-link">
-            [GitHub ↗]
-          </a>
-          <a href={personalInfo?.linkedin || '#'} target="_blank" rel="noopener noreferrer" className="footer-link">
-            [LinkedIn ↗]
-          </a>
         </div>
       </div>
     </footer>

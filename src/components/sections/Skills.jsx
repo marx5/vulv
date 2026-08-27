@@ -5,6 +5,7 @@ import ThreeSkillsCanvas from './ThreeSkillsCanvas'
 
 export default function Skills({ skills = [] }) {
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0)
+  const [hoveredTech, setHoveredTech] = useState(null)
   const categoryIcons = ['⚡', '🛡️', '🚀']
 
   const totalTech = skills.reduce((acc, cat) => acc + cat.items.length, 0)
@@ -29,11 +30,11 @@ export default function Skills({ skills = [] }) {
           <div className="panel-header-bar">
             <span className="panel-status-indicator">LIVE ARCHITECTURE</span>
             <span className="panel-category-tag">
-              {skills[activeCategoryIndex]?.category || 'Fullstack Stack'}
+              {hoveredTech ? `FOCUS: ${hoveredTech}` : (skills[activeCategoryIndex]?.category || 'Fullstack Stack')}
             </span>
           </div>
 
-          <ThreeSkillsCanvas activeCategoryIndex={activeCategoryIndex} />
+          <ThreeSkillsCanvas activeCategoryIndex={activeCategoryIndex} hoveredTech={hoveredTech} />
 
           <div className="skills-3d-stats">
             <div className="stats-glass-chip">
@@ -76,11 +77,25 @@ export default function Skills({ skills = [] }) {
                 </div>
 
                 <div className="liquid-chips-grid">
-                  {cat.items.map((item, sIdx) => (
-                    <Tag key={sIdx} variant="pill" dot={true}>
-                      {item}
-                    </Tag>
-                  ))}
+                  {cat.items.map((item, sIdx) => {
+                    const isHovered = hoveredTech === item
+                    return (
+                      <div
+                        key={sIdx}
+                        onMouseEnter={(e) => {
+                          e.stopPropagation()
+                          setActiveCategoryIndex(idx)
+                          setHoveredTech(item)
+                        }}
+                        onMouseLeave={() => setHoveredTech(null)}
+                        style={{ display: 'inline-block' }}
+                      >
+                        <Tag variant="pill" dot={true} className={isHovered ? 'tech-tag-highlight' : ''}>
+                          {item}
+                        </Tag>
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
             )

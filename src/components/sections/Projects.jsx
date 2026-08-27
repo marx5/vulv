@@ -30,18 +30,6 @@ export default function Projects({ projects = [] }) {
               </div>
 
               <div className="project-footer-links">
-                {project.githubUrl && (
-                  <Button
-                    as="a"
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    variant="default"
-                    style={{ padding: '5px 10px', fontSize: '0.75rem', flex: 1 }}
-                  >
-                    Code ↗
-                  </Button>
-                )}
                 {project.liveUrl && (
                   <Button
                     as="a"

@@ -6,8 +6,6 @@ export const portfolioData = {
     status: "Sẵn sàng nhận dự án mới",
     location: "Hà Nội, Việt Nam",
     email: "vulv.bnvn@gmail.com",
-    github: "https://github.com/marx5",
-    linkedin: "#",
     bio: "Kỹ sư phần mềm đam mê xây dựng các sản phẩm web tốc độ cao, giao diện trực quan và kiến trúc code sạch sẽ.",
     stats: [
       { id: "exp", number: "0+", label: "Năm kinh nghiệm" },
@@ -23,7 +21,7 @@ export const portfolioData = {
     },
     {
       category: "Backend & APIs",
-      items: ["Node.js", "Express", "PostgreSQL", "MySQL", "MongoDB", "Redis"],
+      items: ["Node.js", "Express", "MySQL", "MongoDB", "Redis"],
     },
     {
       category: "DevOps & Tools",
@@ -38,16 +36,27 @@ export const portfolioData = {
       category: "Frontend Web",
       description: "Website giới thiệu bản thân của Lâm Văn Vũ, một Fullstack Developer với 0+ năm kinh nghiệm trong lĩnh vực phát triển phần mềm.",
       techStack: ["React", "Vite", "HTML5/CSS3"],
-      githubUrl: "https://github.com/marx5",
       liveUrl: "https://vulv.id.vn",
     },
     {
       id: "vulv",
       title: "VuLV",
-      category: "Realtime Web",
-      description: "",
-      techStack: [],
-      githubUrl: "",
+      category: "Realtime System",
+      description: "...",
+      techStack: [
+        "React",
+        "Node.js",
+        "Express",
+        "MySQL",
+        "MongoDB",
+        "Redis",
+        "Docker",
+        "Nginx",
+        "Git / GitHub",
+        "Linux",
+        "Postman",
+        "CI/CD"
+      ],
       liveUrl: "",
     }
   ],

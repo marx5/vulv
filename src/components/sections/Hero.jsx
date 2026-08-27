@@ -47,17 +47,6 @@ export default function Hero({ personalInfo }) {
             <span>Liên hệ</span>
             <span>→</span>
           </Button>
-
-          <Button 
-            as="a"
-            href={personalInfo?.github || '#'} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            variant="default"
-          >
-            <span>GitHub</span>
-            <span>↗</span>
-          </Button>
         </div>
       </Card>
     </Section>
