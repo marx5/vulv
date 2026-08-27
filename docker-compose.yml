@@ -1,4 +1,4 @@
-name: vulv-client
+name: vulv
 
 services:
   client:
