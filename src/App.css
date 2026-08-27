@@ -683,6 +683,7 @@ body {
   height: 310px;
   margin: 0.5rem 0;
   z-index: 1;
+  contain: layout paint;
 }
 
 .three-canvas-container {
@@ -690,6 +691,15 @@ body {
   height: 100%;
   cursor: grab;
   touch-action: none;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.three-canvas-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  outline: none;
 }
 
 .three-canvas-container:active {
