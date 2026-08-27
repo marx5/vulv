@@ -5,7 +5,6 @@ import { NavigationProvider } from './context/NavigationContext'
 import { useScrollSpy } from './hooks/useScrollSpy'
 import Navbar from './components/layout/Navbar'
 import SideNavigator from './components/layout/SideNavigator'
-import Footer from './components/layout/Footer'
 import Hero from './components/sections/Hero'
 import About from './components/sections/About'
 import Skills from './components/sections/Skills'
@@ -28,10 +27,11 @@ function PortfolioContent() {
         <Skills skills={portfolioData.skills} />
         <Projects projects={portfolioData.projects} />
         <Experience experience={portfolioData.experience} />
-        <Contact contactInfo={portfolioData.contact} />
+        <Contact 
+          contactInfo={portfolioData.contact} 
+          personalInfo={portfolioData.personal} 
+        />
       </main>
-
-      <Footer personalInfo={portfolioData.personal} />
     </div>
   )
 }

@@ -4,14 +4,14 @@
    ========================================================================== */
 
 :root {
-  --bg-primary: #070b14;
-  --bg-secondary: #0c1322;
-  --bg-card: rgba(12, 20, 36, 0.8);
-  --bg-card-hover: rgba(18, 30, 52, 0.9);
-  --bg-input: rgba(8, 14, 28, 0.95);
+  --bg-primary: #0d1527;
+  --bg-secondary: #142038;
+  --bg-card: rgba(20, 32, 58, 0.75);
+  --bg-card-hover: rgba(30, 48, 86, 0.85);
+  --bg-input: rgba(15, 23, 42, 0.9);
 
   /* Dashed Borders */
-  --border-dashed: rgba(148, 163, 184, 0.28);
+  --border-dashed: rgba(148, 163, 184, 0.35);
   --border-dashed-hover: #38bdf8;
   --border-dashed-active: #60a5fa;
   --border-radius: 10px;
@@ -54,10 +54,10 @@ html {
 body {
   background-color: var(--bg-primary);
   background-image: 
-    radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.04) 0%, transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(129, 140, 248, 0.04) 0%, transparent 40%),
-    linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(129, 140, 248, 0.08) 0%, transparent 50%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
   color: var(--text-main);
   font-family: var(--font-sans);
@@ -262,7 +262,7 @@ body {
   width: 100%;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  background: rgba(7, 11, 20, 0.85);
+  background: rgba(13, 21, 39, 0.85);
   border-bottom: 1px dashed var(--border-dashed);
 }
 
@@ -1152,14 +1152,30 @@ body {
 }
 
 /* ==========================================================================
-   Footer Section (Compact)
+   Footer Section & Contact Integration
    ========================================================================== */
 
+.contact-section-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+.contact-main-flow {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .footer-section {
+  width: 100%;
   border-top: 1px dashed var(--border-dashed);
-  background: rgba(7, 11, 20, 0.95);
-  padding: 1.25rem 1.5rem;
-  scroll-snap-align: end;
+  background: transparent;
+  padding: 1rem 0 0.5rem;
+  margin-top: 1.25rem;
 }
 
 .footer-inner {
