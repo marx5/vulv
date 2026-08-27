@@ -15,7 +15,7 @@ export default function Skills({ skills = [] }) {
         badge={
           <div className="liquid-glass-badge">
             <span className="liquid-badge-dot" />
-            <span>02. TECH STACK & 3D MATRIX</span>
+            <span>02. FULLSTACK ARCHITECTURE & 3D MATRIX</span>
           </div>
         }
         title="Kỹ năng chuyên môn"
@@ -27,9 +27,9 @@ export default function Skills({ skills = [] }) {
         <div className="skills-3d-panel liquid-glass-panel">
           <div className="liquid-glass-glow-orb" />
           <div className="panel-header-bar">
-            <span className="panel-status-indicator">LIVE 3D CORE</span>
+            <span className="panel-status-indicator">LIVE ARCHITECTURE</span>
             <span className="panel-category-tag">
-              {skills[activeCategoryIndex]?.category || 'Tech Sphere'}
+              {skills[activeCategoryIndex]?.category || 'Fullstack Stack'}
             </span>
           </div>
 
@@ -41,12 +41,12 @@ export default function Skills({ skills = [] }) {
               <span className="stats-value">{totalTech}+</span>
             </div>
             <div className="stats-glass-chip">
-              <span className="stats-label">DOMAINS</span>
-              <span className="stats-value">{skills.length} Areas</span>
+              <span className="stats-label">SYSTEM LAYERS</span>
+              <span className="stats-value">3 Tiers</span>
             </div>
             <div className="stats-glass-chip">
-              <span className="stats-label">ENGINE</span>
-              <span className="stats-value">WebGL 3D</span>
+              <span className="stats-label">TOPOLOGY</span>
+              <span className="stats-value">Exploded 3D</span>
             </div>
           </div>
         </div>
