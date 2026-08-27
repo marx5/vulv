@@ -1,23 +1,15 @@
 import React, { useState } from 'react'
+import { useNavigation } from '../../hooks/useNavigation'
+import { Button } from '../ui/Button'
 
-export default function Navbar({ personalInfo, activeSection = 'hero', onNavigate }) {
+export default function Navbar({ personalInfo }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
-  const navLinks = [
-    { id: 'hero', label: 'Trang chủ', href: '#hero' },
-    { id: 'about', label: 'Giới thiệu', href: '#about' },
-    { id: 'skills', label: 'Kỹ năng', href: '#skills' },
-    { id: 'projects', label: 'Dự án', href: '#projects' },
-    { id: 'experience', label: 'Kinh nghiệm', href: '#experience' },
-    { id: 'contact', label: 'Liên hệ', href: '#contact' },
-  ]
+  const { activeSection, scrollTo, sections } = useNavigation()
 
   const handleLinkClick = (e, targetId) => {
+    e.preventDefault()
     setMobileMenuOpen(false)
-    if (onNavigate) {
-      e.preventDefault()
-      onNavigate(targetId)
-    }
+    scrollTo(targetId)
   }
 
   return (
@@ -29,7 +21,7 @@ export default function Navbar({ personalInfo, activeSection = 'hero', onNavigat
           onClick={(e) => handleLinkClick(e, 'hero')}
         >
           <span className="navbar-logo-badge">&lt;/&gt;</span>
-          <span>{personalInfo.shortName}</span>
+          <span>{personalInfo?.shortName || 'VuLV'}</span>
         </a>
 
         <button 
@@ -42,7 +34,7 @@ export default function Navbar({ personalInfo, activeSection = 'hero', onNavigat
 
         <nav>
           <ul className={`navbar-nav ${mobileMenuOpen ? 'open' : ''}`}>
-            {navLinks.map((item) => (
+            {sections.map((item) => (
               <li key={item.id}>
                 <a 
                   href={item.href} 
@@ -54,14 +46,15 @@ export default function Navbar({ personalInfo, activeSection = 'hero', onNavigat
               </li>
             ))}
             <li>
-              <a 
-                href="#contact" 
-                className="dashed-btn dashed-btn-primary" 
+              <Button
+                as="a"
+                href="#contact"
+                variant="primary"
                 style={{ padding: '6px 14px', fontSize: '0.82rem' }}
                 onClick={(e) => handleLinkClick(e, 'contact')}
               >
                 Hợp tác ngay
-              </a>
+              </Button>
             </li>
           </ul>
         </nav>

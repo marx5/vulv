@@ -1,14 +1,8 @@
 import React from 'react'
+import { useNavigation } from '../../hooks/useNavigation'
 
-export default function SideNavigator({ activeSection, onNavigate }) {
-  const sections = [
-    { id: 'hero', label: 'Trang chủ' },
-    { id: 'about', label: 'Giới thiệu' },
-    { id: 'skills', label: 'Kỹ năng' },
-    { id: 'projects', label: 'Dự án' },
-    { id: 'experience', label: 'Kinh nghiệm' },
-    { id: 'contact', label: 'Liên hệ' },
-  ]
+export default function SideNavigator() {
+  const { activeSection, scrollTo, sections } = useNavigation()
 
   return (
     <aside className="side-navigator" aria-label="Section navigator">
@@ -16,7 +10,7 @@ export default function SideNavigator({ activeSection, onNavigate }) {
         <div key={sec.id} className="side-dot-item">
           <button
             className={`side-dot-btn ${activeSection === sec.id ? 'active' : ''}`}
-            onClick={() => onNavigate(sec.id)}
+            onClick={() => scrollTo(sec.id)}
             aria-label={`Cuộn đến ${sec.label}`}
           />
           <span className="side-dot-tooltip">{sec.label}</span>

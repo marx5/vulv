@@ -212,7 +212,6 @@ export default function ThreeSkillsCanvas({ activeCategoryIndex = 0 }) {
         const height = entry.contentRect.height
         if (width > 0 && height > 0) {
           camera.aspect = width / height
-          // Adjust camera distance for small smartphone screens vs wide desktop
           if (width < 480) {
             camera.position.z = 7.6
           } else if (width < 768) {
@@ -305,15 +304,11 @@ export default function ThreeSkillsCanvas({ activeCategoryIndex = 0 }) {
       nodeGeo.dispose()
       renderer.dispose()
     }
-  }, [])
+  }, [activeCategoryIndex])
 
   return (
     <div className="three-skills-wrapper">
       <div className="three-canvas-container" ref={containerRef} />
-      <div className="three-canvas-hint">
-        <span className="three-hint-pulse" />
-        <span>Kéo để xoay không gian 3D</span>
-      </div>
     </div>
   )
 }

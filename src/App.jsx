@@ -1,78 +1,45 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import './App.css'
 import { portfolioData } from './data/portfolioData'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import About from './components/About'
-import Skills from './components/Skills'
-import Projects from './components/Projects'
-import Experience from './components/Experience'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
-import SideNavigator from './components/SideNavigator'
+import { NavigationProvider } from './context/NavigationContext'
+import { useScrollSpy } from './hooks/useScrollSpy'
+import Navbar from './components/layout/Navbar'
+import SideNavigator from './components/layout/SideNavigator'
+import Footer from './components/layout/Footer'
+import Hero from './components/sections/Hero'
+import About from './components/sections/About'
+import Skills from './components/sections/Skills'
+import Projects from './components/sections/Projects'
+import Experience from './components/sections/Experience'
+import Contact from './components/sections/Contact'
 
-function App() {
-  const [activeSection, setActiveSection] = useState('hero')
-
-  useEffect(() => {
-    const sectionIds = ['hero', 'about', 'skills', 'projects', 'experience', 'contact']
-    const elements = sectionIds
-      .map(id => document.getElementById(id))
-      .filter(Boolean)
-
-    if (elements.length === 0) return
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id)
-          }
-        })
-      },
-      {
-        rootMargin: '-30% 0px -40% 0px',
-        threshold: 0.1,
-      }
-    )
-
-    elements.forEach((el) => observer.observe(el))
-
-    return () => {
-      elements.forEach((el) => observer.unobserve(el))
-    }
-  }, [])
-
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      setActiveSection(id)
-    }
-  }
+function PortfolioContent() {
+  // Lắng nghe vị trí viewport để tự động cập nhật activeSection trong NavigationContext
+  useScrollSpy()
 
   return (
     <div className="app-wrapper">
-      <Navbar 
-        personalInfo={portfolioData.personal} 
-        activeSection={activeSection}
-        onNavigate={scrollToSection}
-      />
-      <SideNavigator 
-        activeSection={activeSection}
-        onNavigate={scrollToSection}
-      />
+      <Navbar personalInfo={portfolioData.personal} />
+      <SideNavigator />
+      
       <main>
-        <Hero personalInfo={portfolioData.personal} onNavigate={scrollToSection} />
+        <Hero personalInfo={portfolioData.personal} />
         <About personalInfo={portfolioData.personal} />
         <Skills skills={portfolioData.skills} />
         <Projects projects={portfolioData.projects} />
         <Experience experience={portfolioData.experience} />
         <Contact contactInfo={portfolioData.contact} />
       </main>
-      <Footer personalInfo={portfolioData.personal} onNavigate={scrollToSection} />
+
+      <Footer personalInfo={portfolioData.personal} />
     </div>
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <NavigationProvider>
+      <PortfolioContent />
+    </NavigationProvider>
+  )
+}
