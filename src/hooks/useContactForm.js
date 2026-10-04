@@ -1,9 +1,10 @@
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import { SubmitContactMessage } from '../core/usecases/SubmitContactMessage'
 import { FormSubmitContactService } from '../infrastructure/services/FormSubmitContactService'
+import { CONTACT_EMAIL } from '../data/portfolioData'
 
 // Khởi tạo instance mặc định của Infrastructure Service (FormSubmit) & Use Case
-const defaultContactService = new FormSubmitContactService({ targetEmail: 'vulv.bnvn@gmail.com' })
+const defaultContactService = new FormSubmitContactService({ targetEmail: CONTACT_EMAIL })
 const defaultSubmitUseCase = new SubmitContactMessage(defaultContactService)
 
 /**
@@ -11,7 +12,7 @@ const defaultSubmitUseCase = new SubmitContactMessage(defaultContactService)
  * Kết nối giữa React View và Lớp Use Case Clean Architecture
  */
 export function useContactForm(
-  initialValues = { name: '', email: '', message: '' },
+  initialValues = { name: '', email: '', message: '', website: '' },
   submitUseCase = defaultSubmitUseCase
 ) {
   const [formData, setFormData] = useState(initialValues)
@@ -19,6 +20,10 @@ export function useContactForm(
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [serverError, setServerError] = useState(null)
+  const resetTimerRef = useRef(null)
+
+  // Dọn timer reset form khi component bị unmount
+  useEffect(() => () => clearTimeout(resetTimerRef.current), [])
 
   const handleChange = useCallback((e) => {
     const { name, value } = e.target
@@ -39,11 +44,24 @@ export function useContactForm(
       if (e && e.preventDefault) e.preventDefault()
 
       setServerError(null)
+
+      // Honeypot bị điền => nhiều khả năng là bot: giả lập thành công, không gửi đi
+      if (formData.website) {
+        setIsSubmitted(true)
+        return
+      }
+
       setIsSubmitting(true)
 
-      const result = await submitUseCase.execute(formData)
-
-      setIsSubmitting(false)
+      let result
+      try {
+        result = await submitUseCase.execute(formData)
+      } catch (err) {
+        setServerError(err?.message || 'Đã có lỗi xảy ra, vui lòng thử lại.')
+        return
+      } finally {
+        setIsSubmitting(false)
+      }
 
       if (!result.success) {
         if (result.errors) {
@@ -63,7 +81,8 @@ export function useContactForm(
       }
 
       // Reset form sau 3 giây
-      setTimeout(() => {
+      clearTimeout(resetTimerRef.current)
+      resetTimerRef.current = setTimeout(() => {
         setFormData(initialValues)
         setIsSubmitted(false)
       }, 3000)

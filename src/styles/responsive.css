@@ -1,0 +1,156 @@
+/* ==========================================================================
+   Responsive Breakpoints - Smartphone, Tablet/iPad, Desktop
+   ========================================================================== */
+
+/* Tablet & iPad (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .skills-liquid-layout {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .skills-3d-panel {
+    padding: 1.2rem;
+  }
+
+  .three-skills-wrapper {
+    height: 280px;
+  }
+
+  .skills-cards-column {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.85rem;
+  }
+}
+
+/* Medium Tablets & Mobile Landscape (max-width: 960px) */
+@media (max-width: 960px) {
+  .about-grid-compact,
+  .projects-grid-compact,
+  .timeline-grid-compact,
+  .contact-grid-compact {
+    grid-template-columns: 1fr;
+  }
+
+  .skills-cards-column {
+    grid-template-columns: 1fr;
+  }
+
+  .section-fullscreen {
+    min-height: auto;
+    padding: calc(var(--header-height) + 1.5rem) 1.2rem 2.5rem;
+    scroll-snap-align: start;
+  }
+
+  html {
+    scroll-snap-type: y proximity;
+  }
+
+  .hero-main-box {
+    padding: 2rem 1.5rem;
+  }
+}
+
+/* Smartphone & Small Tablets (max-width: 640px) */
+@media (max-width: 640px) {
+  .navbar-nav {
+    display: none;
+  }
+
+  .navbar-nav.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    background: var(--bg-secondary);
+    border-bottom: 1.5px dashed var(--border-dashed);
+    padding: 1.2rem;
+    gap: 0.8rem;
+  }
+
+  .navbar-mobile-toggle {
+    display: block;
+  }
+
+  .about-details-list {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dashed-btn {
+    width: 100%;
+  }
+
+  /* Skills Liquid Glass on Mobile */
+  .skills-liquid-layout {
+    gap: 0.9rem;
+  }
+
+  .skills-3d-panel {
+    padding: 1rem 0.85rem;
+    border-radius: 12px;
+  }
+
+  .three-skills-wrapper {
+    height: 230px;
+  }
+
+  .three-canvas-hint {
+    font-size: 0.65rem;
+    padding: 3px 10px;
+  }
+
+  .skills-3d-stats {
+    gap: 0.4rem;
+  }
+
+  .stats-glass-chip {
+    padding: 4px 6px;
+  }
+
+  .stats-glass-chip .stats-label {
+    font-size: 0.58rem;
+  }
+
+  .stats-glass-chip .stats-value {
+    font-size: 0.78rem;
+  }
+
+  .liquid-glass-card {
+    padding: 1rem 0.95rem;
+    border-radius: 12px;
+  }
+
+  .liquid-skill-pill {
+    padding: 4px 8px;
+    font-size: 0.74rem;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* Extra Small Smartphones (max-width: 420px) */
+@media (max-width: 420px) {
+  .three-skills-wrapper {
+    height: 200px;
+  }
+
+  .liquid-chips-grid {
+    gap: 0.35rem;
+  }
+
+  .liquid-skill-pill {
+    padding: 3px 7px;
+    font-size: 0.7rem;
+  }
+}

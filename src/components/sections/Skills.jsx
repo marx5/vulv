@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, lazy, Suspense } from 'react'
 import { Section } from '../ui/Section'
 import { Tag } from '../ui/Tag'
-import ThreeSkillsCanvas from './ThreeSkillsCanvas'
+
+const ThreeSkillsCanvas = lazy(() => import('./ThreeSkillsCanvas'))
 
 export default function Skills({ skills = [] }) {
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0)
@@ -34,7 +35,9 @@ export default function Skills({ skills = [] }) {
             </span>
           </div>
 
-          <ThreeSkillsCanvas activeCategoryIndex={activeCategoryIndex} hoveredTech={hoveredTech} />
+          <Suspense fallback={<div className="three-skills-wrapper" aria-busy="true" />}>
+            <ThreeSkillsCanvas activeCategoryIndex={activeCategoryIndex} hoveredTech={hoveredTech} />
+          </Suspense>
 
           <div className="skills-3d-stats">
             <div className="stats-glass-chip">

@@ -1,0 +1,107 @@
+/* ==========================================================================
+   Reusable Dashed Box & Tech UI Components
+   ========================================================================== */
+
+.dashed-box {
+  background-color: var(--bg-card);
+  border: 1.5px dashed var(--border-dashed);
+  border-radius: var(--border-radius);
+  position: relative;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dashed-box:hover {
+  border-color: var(--border-dashed-hover);
+  box-shadow: 0 0 20px var(--accent-glow);
+  transform: translateY(-2px);
+}
+
+/* Corner Indicators */
+.dashed-box-corner::before,
+.dashed-box-corner::after {
+  content: '';
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-color: var(--accent-primary);
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.dashed-box-corner::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--accent-primary);
+  border-left: 2px solid var(--accent-primary);
+  border-top-left-radius: 4px;
+}
+
+.dashed-box-corner::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid var(--accent-primary);
+  border-right: 2px solid var(--accent-primary);
+  border-bottom-right-radius: 4px;
+}
+
+/* Dashed Tag / Chip */
+.dashed-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent-primary);
+  background: rgba(56, 189, 248, 0.06);
+  border: 1px dashed rgba(56, 189, 248, 0.35);
+  border-radius: var(--border-radius-sm);
+  transition: all 0.2s ease;
+}
+
+.dashed-tag:hover {
+  background: rgba(56, 189, 248, 0.12);
+  border-color: var(--accent-primary);
+}
+
+/* Dashed Buttons */
+.dashed-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: var(--border-radius-sm);
+  border: 1.5px dashed var(--border-dashed);
+  background: transparent;
+  color: var(--text-main);
+  transition: all 0.2s ease;
+}
+
+.dashed-btn:hover {
+  border-color: var(--accent-primary);
+  background: rgba(56, 189, 248, 0.08);
+  color: var(--accent-primary);
+  box-shadow: 0 0 14px var(--accent-glow);
+  transform: translateY(-1px);
+}
+
+.dashed-btn-primary {
+  border-color: var(--accent-primary);
+  background: rgba(56, 189, 248, 0.12);
+  color: var(--accent-primary);
+}
+
+.dashed-btn-primary:hover {
+  background: var(--accent-primary);
+  color: #040812;
+  box-shadow: 0 0 18px var(--accent-glow-strong);
+}
+

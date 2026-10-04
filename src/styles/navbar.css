@@ -1,0 +1,94 @@
+/* ==========================================================================
+   Navbar Styling
+   ========================================================================== */
+
+.navbar-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background: rgba(13, 21, 39, 0.85);
+  border-bottom: 1px dashed var(--border-dashed);
+}
+
+.navbar-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  height: var(--header-height);
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--text-main);
+}
+
+.navbar-logo-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1.5px dashed var(--accent-primary);
+  border-radius: var(--border-radius-sm);
+  color: var(--accent-primary);
+  font-size: 0.85rem;
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 0.75rem;
+}
+
+.navbar-link {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: var(--border-radius-sm);
+  border: 1px dashed transparent;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.navbar-link:hover {
+  color: var(--accent-primary);
+  background: rgba(56, 189, 248, 0.06);
+}
+
+.navbar-link.active {
+  color: var(--accent-primary);
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px dashed var(--accent-primary);
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.navbar-mobile-toggle {
+  display: none;
+  background: transparent;
+  border: 1px dashed var(--border-dashed);
+  color: var(--text-main);
+  padding: 6px 10px;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+

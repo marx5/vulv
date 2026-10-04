@@ -1,0 +1,45 @@
+/* ==========================================================================
+   Experience / Timeline Section (Compact)
+   ========================================================================== */
+
+.timeline-grid-compact {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.timeline-card-compact {
+  padding: 1.6rem 1.6rem;
+}
+
+.timeline-period-badge {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-role {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.timeline-company {
+  font-size: 0.85rem;
+  color: var(--accent-secondary);
+  font-family: var(--font-mono);
+  margin-bottom: 0.5rem;
+}
+
+.timeline-desc-compact {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  margin-bottom: 0.85rem;
+}
+
+.timeline-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+

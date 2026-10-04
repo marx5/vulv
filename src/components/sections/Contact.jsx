@@ -61,16 +61,28 @@ export default function Contact({ contactInfo, personalInfo }) {
           <Card className="contact-form-card">
             <form className="contact-form" onSubmit={handleSubmit}>
               {isSubmitted && (
-                <div className="form-success-banner">
+                <div className="form-success-banner" role="status">
                   <span>✓</span> Cảm ơn bạn! Tin nhắn đã được gửi thành công.
                 </div>
               )}
 
               {serverError && (
-                <div className="form-success-banner" style={{ borderColor: '#ef4444', color: '#ef4444', background: 'rgba(239, 68, 68, 0.1)' }}>
+                <div role="alert" className="form-success-banner" style={{ borderColor: '#ef4444', color: '#ef4444', background: 'rgba(239, 68, 68, 0.1)' }}>
                   <span>⚠</span> {serverError}
                 </div>
               )}
+
+              {/* Honeypot: ẩn với người dùng, bot thường tự điền */}
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                value={formData.website || ''}
+                onChange={handleChange}
+                style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+              />
 
               <div className="form-group">
                 <label className="form-label" htmlFor="contact-name">// Tên của bạn *</label>
@@ -83,8 +95,10 @@ export default function Contact({ contactInfo, personalInfo }) {
                   placeholder="Nguyễn Văn A"
                   value={formData.name}
                   onChange={handleChange}
+                  aria-invalid={Boolean(errors.name)}
+                  aria-describedby={errors.name ? 'contact-name-error' : undefined}
                 />
-                {errors.name && <span style={{ color: '#ef4444', fontSize: '0.72rem', fontFamily: 'var(--font-mono)' }}>{errors.name}</span>}
+                {errors.name && <span id="contact-name-error" role="alert" style={{ color: '#ef4444', fontSize: '0.72rem', fontFamily: 'var(--font-mono)' }}>{errors.name}</span>}
               </div>
 
               <div className="form-group">
@@ -98,8 +112,10 @@ export default function Contact({ contactInfo, personalInfo }) {
                   placeholder="name@company.com"
                   value={formData.email}
                   onChange={handleChange}
+                  aria-invalid={Boolean(errors.email)}
+                  aria-describedby={errors.email ? 'contact-email-error' : undefined}
                 />
-                {errors.email && <span style={{ color: '#ef4444', fontSize: '0.72rem', fontFamily: 'var(--font-mono)' }}>{errors.email}</span>}
+                {errors.email && <span id="contact-email-error" role="alert" style={{ color: '#ef4444', fontSize: '0.72rem', fontFamily: 'var(--font-mono)' }}>{errors.email}</span>}
               </div>
 
               <div className="form-group">
@@ -112,8 +128,10 @@ export default function Contact({ contactInfo, personalInfo }) {
                   placeholder="Nội dung cần trao đổi..."
                   value={formData.message}
                   onChange={handleChange}
+                  aria-invalid={Boolean(errors.message)}
+                  aria-describedby={errors.message ? 'contact-message-error' : undefined}
                 />
-                {errors.message && <span style={{ color: '#ef4444', fontSize: '0.72rem', fontFamily: 'var(--font-mono)' }}>{errors.message}</span>}
+                {errors.message && <span id="contact-message-error" role="alert" style={{ color: '#ef4444', fontSize: '0.72rem', fontFamily: 'var(--font-mono)' }}>{errors.message}</span>}
               </div>
 
               <Button 

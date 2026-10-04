@@ -1,5 +1,6 @@
 import React from 'react'
 import './App.css'
+import './reduced-motion.css'
 import { portfolioData } from './data/portfolioData'
 import { NavigationProvider } from './context/NavigationContext'
 import { useScrollSpy } from './hooks/useScrollSpy'

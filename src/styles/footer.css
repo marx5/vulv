@@ -1,0 +1,64 @@
+/* ==========================================================================
+   Footer Section & Contact Integration
+   ========================================================================== */
+
+.contact-section-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+.contact-main-flow {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.footer-section {
+  width: 100%;
+  border-top: 1px dashed var(--border-dashed);
+  background: transparent;
+  padding: 1rem 0 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.footer-brand {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.footer-brand span {
+  color: var(--accent-primary);
+}
+
+.footer-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-link {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: var(--accent-primary);
+}
+

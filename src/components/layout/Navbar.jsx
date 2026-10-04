@@ -28,18 +28,21 @@ export default function Navbar({ personalInfo }) {
           className="navbar-mobile-toggle"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
+          aria-expanded={mobileMenuOpen}
+          aria-controls="primary-nav-list"
         >
           {mobileMenuOpen ? '[Đóng]' : '[Menu]'}
         </button>
 
-        <nav>
-          <ul className={`navbar-nav ${mobileMenuOpen ? 'open' : ''}`}>
+        <nav aria-label="Điều hướng chính">
+          <ul id="primary-nav-list" className={`navbar-nav ${mobileMenuOpen ? 'open' : ''}`}>
             {sections.map((item) => (
               <li key={item.id}>
                 <a 
                   href={item.href} 
                   className={`navbar-link ${activeSection === item.id ? 'active' : ''}`}
                   onClick={(e) => handleLinkClick(e, item.id)}
+                  aria-current={activeSection === item.id ? 'true' : undefined}
                 >
                   {item.label}
                 </a>

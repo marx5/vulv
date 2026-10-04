@@ -10,8 +10,11 @@ export class FormSubmitContactService extends ContactGateway {
    * @param {Object} options
    * @param {string} options.targetEmail Email nhận thông báo
    */
-  constructor({ targetEmail = 'vulv.bnvn@gmail.com' } = {}) {
+  constructor({ targetEmail } = {}) {
     super()
+    if (!targetEmail) {
+      throw new Error('FormSubmitContactService yêu cầu targetEmail')
+    }
     this.targetEmail = targetEmail
   }
 
@@ -29,6 +32,7 @@ export class FormSubmitContactService extends ContactGateway {
       _subject: `[Portfolio VuLV] Tin nhắn mới từ ${dto.name}`,
       _template: 'table',
       _captcha: 'false',
+      _honey: '', // Honeypot: bot điền vào field này sẽ bị FormSubmit loại bỏ
     }
 
     const response = await fetch(`https://formsubmit.co/ajax/${this.targetEmail}`, {

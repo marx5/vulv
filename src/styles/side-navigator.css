@@ -1,0 +1,80 @@
+/* ==========================================================================
+   Side Navigator (Section Dots)
+   ========================================================================== */
+
+.side-navigator {
+  position: fixed;
+  right: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: rgba(7, 11, 20, 0.8);
+  padding: 10px 7px;
+  border-radius: 20px;
+  border: 1px dashed var(--border-dashed);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.side-dot-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.side-dot-btn {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px dashed var(--border-dashed);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.side-dot-btn:hover {
+  border-color: var(--accent-primary);
+  background: rgba(56, 189, 248, 0.4);
+  transform: scale(1.2);
+}
+
+.side-dot-btn.active {
+  border-color: var(--accent-primary);
+  background: var(--accent-primary);
+  box-shadow: 0 0 8px var(--accent-primary);
+  transform: scale(1.3);
+}
+
+.side-dot-tooltip {
+  position: absolute;
+  right: calc(100% + 10px);
+  background: var(--bg-secondary);
+  border: 1px dashed var(--border-dashed);
+  color: var(--text-main);
+  padding: 3px 8px;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  transform: translateX(4px);
+}
+
+.side-dot-item:hover .side-dot-tooltip {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 1080px) {
+  .side-navigator {
+    display: none;
+  }
+}
+

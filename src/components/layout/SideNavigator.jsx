@@ -12,6 +12,7 @@ export default function SideNavigator() {
             className={`side-dot-btn ${activeSection === sec.id ? 'active' : ''}`}
             onClick={() => scrollTo(sec.id)}
             aria-label={`Cuộn đến ${sec.label}`}
+            aria-current={activeSection === sec.id ? 'true' : undefined}
           />
           <span className="side-dot-tooltip">{sec.label}</span>
         </div>
